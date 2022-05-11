@@ -14,7 +14,7 @@ function Landing({ sendTokenToParent }){
     string = string.charAt(0).toUpperCase() + string.slice(1);
     string = string.concat('.');
     return string;
-  }
+  } 
 
   function signUp(){
 
