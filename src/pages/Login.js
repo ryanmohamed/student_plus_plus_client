@@ -6,7 +6,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 
-function Login({ sendToken }){
+function Login({ sendTokenToParent }){
 
     const [err, setErr] = useState(null);
 
@@ -25,7 +25,7 @@ function Login({ sendToken }){
             //depends on response if we allow access
             if(response.data.error) setErr(null);
             console.log(response.data.accessToken || response.data.error);
-
+            sendTokenToParent(response.data.accessToken);
         });
     };
 
@@ -69,7 +69,7 @@ function Login({ sendToken }){
                 </Form>
             </Formik>
 
-            { err && <p> {err} </p>}
+            { err && <span> {err} </span>}
 
             <Link to="/signup" className='link pretty'> No account? <span> Sign up here. </span> </Link>
     

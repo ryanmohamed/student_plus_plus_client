@@ -25,7 +25,14 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path="/" element={<Login />}></Route>
+        <Route path="/" element={
+
+          !accessToken ?
+            <Login sendTokenToParent={sendTokenToParent}/> :
+            <h1>Hi</h1>
+
+        }></Route>
+
         <Route path="/signup" element={<SignUp />}></Route>
 
       </Routes>
