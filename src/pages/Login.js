@@ -24,6 +24,7 @@ function Login({ sendToken }){
 
             //depends on response if we allow access
             if(response.data.error) setErr(null);
+            console.log(response.data.accessToken || response.data.error);
 
         });
     };
