@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 function SidePanel({passPanel}){
 
-    const [assignmentButton, setAssignmentButton] = useState(false);
+    const [assignmentButton, setAssignmentButton] = useState(true);
     const [coursesButton, setCoursesButton] = useState(false);
 
     const handleClick1 = () => {
@@ -24,8 +24,8 @@ function SidePanel({passPanel}){
         <div className="side-panel">
 
             <ul>
-                <li onClick={handleClick1}>:)</li>
-                <li onClick={handleClick2}>:(</li>
+                <li className={assignmentButton && "active"} onClick={handleClick1}>📓</li>
+                <li className={coursesButton && "active"} onClick={handleClick2}>👨‍🏫</li>
             </ul>
 
         </div>

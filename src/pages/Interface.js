@@ -2,6 +2,7 @@ import './Interface.css';
 import react from 'react';
 import { useState } from 'react';
 import SidePanel from './SidePanel';
+import UI from './UI';
 
 function Interface(){
 
@@ -14,13 +15,7 @@ function Interface(){
     return (
         <div className="Interface">
             <SidePanel passPanel={passCurrentPanel}/>
-            <div className="ui">
-
-                { currentPanel && <p> { currentPanel } </p>}
-
-            </div>
-
-
+            <UI panel={currentPanel}/>
         </div>
       );
 }
