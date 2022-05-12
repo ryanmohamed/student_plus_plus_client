@@ -1,4 +1,4 @@
-h1, label {
+.ui h1, .ui label, .ui button, .ui h3 {
     font-family: 'Courier New', Courier, monospace;
     font-weight: 200;
     color: #1d1d1d;
@@ -8,39 +8,56 @@ h1, label {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding: 8%;
 }
 
-span {
-    color: rgb(208, 208, 0);
-    font-style: italic;
+.ui h1 {
+    margin-bottom: 50px;
 }
 
-form {
+.ui h3 {
+    align-self: flex-end;
+    font-weight: 500;
+}
+
+.ui form {
     margin-top: 2rem;
-    width: 500px;
+    width: 60vw;
 }
 
-input, button{
+.ui input {
+    background-color: #1d1d1d;
+    color: #ededed;
+}
+
+.ui input, .ui button{
     padding: 10px;
     height: 40px;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-radius: 8px;
     border: none;
 }
 
-button {
-    margin-top: 2rem;
+.ui button {
+    margin-top: 0;
     transition: 0.23s ease-in-out;
 }
 
-button:hover{
+.ui button:hover{
     cursor: pointer;
     background-color: #4fb24f;
+    color: #ededed;
 }
 
-form > * {
+.ui form > * {
     display: block;
     width: 100%;
+}
+
+.ui span {
+    color: #ea1919;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: bold;
+    text-transform: lowercase;
 }

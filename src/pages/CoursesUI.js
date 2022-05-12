@@ -1,25 +1,55 @@
+import './UI.css';
+import './CoursesUI.css';
 import react from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import axios from 'axios';
 import * as Yup from 'yup';
 
-function CoursesUI(){
+function CoursesUI({accessToken}){
 
+    const [courses, setCourses] = useState([]);
+
+    const getCourses = () => {
+
+        const headers = {
+            'authorization' : `Bearer ${accessToken}`
+        }
+
+        axios.get(`http://localhost:3001/courses/`, {
+            headers: headers
+        }).then((response) => {
+            setCourses(response.data);
+        }); 
+
+    }
+
+    useEffect(() => {
+        getCourses();
+    }, [courses]);
 
     const initialValues = {
         courseName: ""
     };
 
-    // const onSubmit = (data) => {
-    //     const config = {
-    //         email: data.email,
-    //         password: data.password
-    //     }
-    //     axios.post(`http://localhost:3001/auth/signup`, config).then((response) => {
-    //         console.log(response);
-    //         setMsg(response.data.message || response.data.error);
-    //     }); 
-    // };
+    const onSubmit = (data) => {
+
+        const headers = {
+            'content-type' : 'application/json',
+            'authorization' : `Bearer ${accessToken}`
+        }
+
+        const config = {
+            name: data.courseName
+        }
+
+        axios.post(`http://localhost:3001/courses/create`, config, {
+            headers: headers
+        }).then((response) => {
+            getCourses();
+        }); 
+
+    };
 
     const validationSchema = Yup.object().shape({
         courseName: Yup.string().required()
@@ -30,11 +60,13 @@ function CoursesUI(){
             
             <h1>Courses</h1>
 
-            <Formik initialValues={initialValues} validationSchema={validationSchema}>
+            <h3> Add a course: </h3>
+
+            <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form>
 
                     <label>Course Name: </label>
-                    <ErrorMessage name="course" component="span"/>
+                    <ErrorMessage name="courseName" component="span"/>
                     <Field 
                         id="courseName"
                         name="courseName" 
@@ -46,6 +78,13 @@ function CoursesUI(){
 
                 </Form>
             </Formik>
+
+            <div className="course-container">
+                { courses && courses.map((course, index) => (
+                        <p className="course"> {index+1}: {course.name} </p> ))
+                }
+            </div>
+            
 
         </div>
       );

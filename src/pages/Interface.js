@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SidePanel from './SidePanel';
 import UI from './UI';
 
-function Interface(){
+function Interface({accessToken}){
 
     const [currentPanel, setCurrentPanel] = useState(1);
 
@@ -15,7 +15,7 @@ function Interface(){
     return (
         <div className="Interface">
             <SidePanel passPanel={passCurrentPanel}/>
-            <UI panel={currentPanel}/>
+            <UI panel={currentPanel} accessToken={accessToken}/>
         </div>
       );
 }

@@ -1,0 +1,18 @@
+.course-container {
+    margin-top: 25px;
+    width: 60vw;
+}
+
+.course {
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #1d1d1d;
+    color: #ededed;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 10px;
+}

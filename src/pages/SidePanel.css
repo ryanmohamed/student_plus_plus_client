@@ -30,6 +30,6 @@ li:hover {
 .active {
 
     height: 15vw;
-    filter: brightness(1.4);
+    background-color: #1d1d1d;
 
 }

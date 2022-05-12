@@ -5,16 +5,16 @@ import { useState } from 'react';
 
 function SidePanel({passPanel}){
 
-    const [assignmentButton, setAssignmentButton] = useState(true);
-    const [coursesButton, setCoursesButton] = useState(false);
+    const [coursesButton, setCoursesButton] = useState(true);
+    const [assignmentButton, setAssignmentButton] = useState(false);
     const [priorityListButton, setPriorityListButton] = useState(false);
     const [goalsButton, setGoalsButton] = useState(false);
     const [settingsButton, setSettingsButton] = useState(false);
     const [tagsButton, setTagsButton] = useState(false);
 
     const handleClick1 = () => {
-        setAssignmentButton(true);
-        setCoursesButton(false);
+        setCoursesButton(true);
+        setAssignmentButton(false);
         setPriorityListButton(false);
         setGoalsButton(false);
         setSettingsButton(false);
@@ -23,8 +23,8 @@ function SidePanel({passPanel}){
     }
 
     const handleClick2 = () => {
-        setCoursesButton(true);
-        setAssignmentButton(false);
+        setCoursesButton(false);
+        setAssignmentButton(true);
         setPriorityListButton(false);
         setGoalsButton(false);
         setSettingsButton(false);
@@ -76,12 +76,12 @@ function SidePanel({passPanel}){
         <div className="side-panel">
 
             <ul>
-                <li className={assignmentButton && "active"} onClick={handleClick1}>📓</li>
-                <li className={coursesButton && "active"} onClick={handleClick2}>👨‍🏫</li>
+                <li className={coursesButton && "active"} onClick={handleClick1}>👨‍🏫</li>
+                <li className={assignmentButton && "active"} onClick={handleClick2}>📓</li>
                 <li className={priorityListButton && "active"} onClick={handleClick3}>Placeholder</li>
                 <li className={goalsButton && "active"} onClick={handleClick4}>Placeholder</li>
                 <li className={settingsButton && "active"} onClick={handleClick5}>Placeholder</li>
-                <li className={tagsButton && "active"} onClick={handleClicks6}>Placeholder</li>
+                <li className={tagsButton && "active"} onClick={handleClick6}>Placeholder</li>
 
             </ul>
 

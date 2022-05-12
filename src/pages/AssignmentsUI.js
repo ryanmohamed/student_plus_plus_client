@@ -2,7 +2,8 @@ import react from 'react';
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-function AssignmentsUI(){
+
+function AssignmentsUI({accessToken}){
 
     const initialValues = {
         course: "",

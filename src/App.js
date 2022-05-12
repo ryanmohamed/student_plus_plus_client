@@ -28,7 +28,7 @@ function App() {
 
           !accessToken ?
             <Login sendTokenToParent={sendTokenToParent}/> :
-            <Interface />
+            <Interface accessToken={accessToken}/>
 
         }></Route>
 
