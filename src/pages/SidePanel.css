@@ -1,0 +1,34 @@
+.side-panel {
+    background-color: #1d1d1d;
+}
+
+li {
+    background-color: #4fb24f;
+    height: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.23s;
+}
+
+li:nth-child(2n) {
+    filter: brightness(1.2);
+}
+
+li:last-child{
+    border-radius: 0 0 4px 4px;
+    box-shadow: rgba(5, 5, 5, 0.2) 0 2px 2px;
+}
+
+li:hover {
+    height: 15vw;
+    cursor: pointer;
+    filter: brightness(1.4);
+}
+
+.active {
+
+    height: 15vw;
+    filter: brightness(1.4);
+
+}

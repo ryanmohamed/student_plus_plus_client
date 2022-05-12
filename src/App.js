@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Interface from './pages/Interface';
 
 
 function App() { 
@@ -27,7 +28,7 @@ function App() {
 
           !accessToken ?
             <Login sendTokenToParent={sendTokenToParent}/> :
-            <h1>Hi</h1>
+            <Interface />
 
         }></Route>
 
