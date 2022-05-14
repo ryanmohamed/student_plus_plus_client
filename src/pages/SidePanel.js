@@ -76,12 +76,12 @@ function SidePanel({passPanel}){
         <div className="side-panel">
 
             <ul>
-                <li className={coursesButton && "active"} onClick={handleClick1}>👨‍🏫</li>
-                <li className={assignmentButton && "active"} onClick={handleClick2}>📓</li>
-                <li className={priorityListButton && "active"} onClick={handleClick3}>Placeholder</li>
-                <li className={goalsButton && "active"} onClick={handleClick4}>Placeholder</li>
-                <li className={settingsButton && "active"} onClick={handleClick5}>Placeholder</li>
-                <li className={tagsButton && "active"} onClick={handleClick6}>Placeholder</li>
+                <li className={coursesButton ? "active" : undefined} onClick={handleClick1}>👨‍🏫</li>
+                <li className={assignmentButton ? "active" : undefined} onClick={handleClick2}>📓</li>
+                <li className={priorityListButton ? "active" : undefined} onClick={handleClick3}>Placeholder</li>
+                <li className={goalsButton ? "active" : undefined} onClick={handleClick4}>Placeholder</li>
+                <li className={settingsButton ? "active" : undefined} onClick={handleClick5}>Placeholder</li>
+                <li className={tagsButton ? "active" : undefined} onClick={handleClick6}>Placeholder</li>
 
             </ul>
 

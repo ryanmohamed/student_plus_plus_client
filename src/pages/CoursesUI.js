@@ -81,7 +81,7 @@ function CoursesUI({accessToken}){
 
             <div className="course-container">
                 { courses && courses.map((course, index) => (
-                        <p className="course"> {index+1}: {course.name} </p> ))
+                        <p className="course" key={index}> {index+1}: {course.name} </p> ))
                 }
             </div>
             
