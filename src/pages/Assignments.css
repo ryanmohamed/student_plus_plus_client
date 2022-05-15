@@ -1,0 +1,40 @@
+.assignment {
+    margin: 20px;
+    padding: 5px;
+    background-color: #1d1d1d;
+    width: 60vw;
+    height: 50px;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+}
+
+.assignment span {
+    font-size: 1em;
+    text-align: center;
+    color: rgb(255, 255, 0);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.assignment .course-name {
+    text-transform: uppercase;
+}
+
+.assignment .name {
+    text-transform: uppercase;
+}
+
+.assignment .weight {
+    color: #4fb24f;
+}
+
+.error {
+    margin-top: 15px;
+    padding: 0 10px;
+    background-color: rgba(29, 29, 29, 0.2);
+    border-radius: 2px;
+}

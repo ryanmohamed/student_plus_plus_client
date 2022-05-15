@@ -1,6 +1,7 @@
 import react from 'react';
 import { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import Assignment from './Assignment';
 import * as Yup from 'yup';
 import axios from 'axios';
 
@@ -28,7 +29,7 @@ function AssignmentsUI({accessToken}){
 
     const initialValues = {
         course: "",
-        id: "",
+        name: "",
         dueDate: "",
         weight: "",
         difficulty: ""
@@ -36,7 +37,7 @@ function AssignmentsUI({accessToken}){
 
     const validationSchema = Yup.object().shape({
         course: Yup.string().required(),
-        id: Yup.string().required(),
+        name: Yup.string().required(),
         dueDate: Yup.string().required(),
         weight: Yup.number().required().positive(),
         difficulty: Yup.number().required().positive().integer().min(1).max(5)
@@ -50,7 +51,7 @@ function AssignmentsUI({accessToken}){
 
         const config = {
             course: data.course,
-            id: data.id,
+            name: data.name,
             dueDate: data.dueDate,
             weight: data.weight,
             difficulty: data.difficulty
@@ -85,10 +86,10 @@ function AssignmentsUI({accessToken}){
                     />
 
                     <label>Name: </label>
-                    <ErrorMessage name="id" component="span"/>
+                    <ErrorMessage name="name" component="span"/>
                     <Field 
-                        id="id"
-                        name="id" 
+                        id="name"
+                        name="name" 
                         type="text"
                         placeholder="(Ex: HW1)"
                     />
@@ -125,11 +126,24 @@ function AssignmentsUI({accessToken}){
                 </Form>
             </Formik>
 
-            <p>{err ? err : undefined}</p>
+            <span class="error">{err ? err : undefined}</span>
 
             <div className="assignment-container">
-                { assignments && 
-                        <p> {JSON.stringify(assignments[0])} </p> 
+                { assignments.map(courseAssignments => (
+                        courseAssignments.map(assignment => {
+                            const courseName = assignment.courseName;
+                            const name = assignment.name;
+                            const dueDate = assignment.dueDate;
+                            const weight = assignment.weight;
+                            const priority = 1;
+                            return <Assignment 
+                                courseName={courseName}
+                                name={name}
+                                dueDate={dueDate}
+                                weight={weight}
+                                priority={priority}/>
+                        })
+                  ))
                 }
             </div>
             
