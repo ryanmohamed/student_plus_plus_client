@@ -5,8 +5,9 @@
     width: 60vw;
     height: 50px;
     border-radius: 8px;
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 0.5fr;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .assignment span {
@@ -37,4 +38,11 @@
     padding: 0 10px;
     background-color: rgba(29, 29, 29, 0.2);
     border-radius: 2px;
+}
+
+.touched-assignment {
+    filter: brightness(1.2);
+    /* cursor: pointer;
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 0.5fr 0.5fr;  */
 }
