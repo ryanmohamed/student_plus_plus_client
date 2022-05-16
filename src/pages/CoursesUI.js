@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
+import { findRenderedDOMComponentWithClass } from 'react-dom/test-utils';
 
 function CoursesUI({accessToken}){
 
     const [courses, setCourses] = useState([]);
-
     const getCourses = () => {
 
         const headers = {
@@ -23,6 +23,12 @@ function CoursesUI({accessToken}){
         }); 
 
     }
+
+    const [categoriesCount, setCategoriesCount] = useState(0);
+
+    const addCategory = () => {
+      setCategoriesCount(categoriesCount + 1);
+    };
 
     useEffect(() => {
         getCourses();
@@ -55,6 +61,10 @@ function CoursesUI({accessToken}){
         courseName: Yup.string().required()
     });
 
+    let fields = [];
+    for (let i = 0; i < categoriesCount; i++) {
+      fields.push(<label>Category: </label><ErrorMessage name="category" component="span"/><Field id="category" name="category" type="text" placeholder="(Ex: Math)"></Field>);
+    }
     return (
         <div className="CoursesUI ui">
             
@@ -73,7 +83,8 @@ function CoursesUI({accessToken}){
                         type="text"
                         placeholder="(Ex: CS381)"
                     />
-
+                    { fields.map(field => field); }
+                    <button onClick={addCategory()}>Add Category</button>
                     <button type='submit'> Add Course </button>
 
                 </Form>
