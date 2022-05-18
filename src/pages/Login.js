@@ -23,7 +23,7 @@ function Login({ sendTokenToParent }){
         axios.post(`http://localhost:3001/auth/login`, config).then((response) => {
 
             //depends on response if we allow access
-            if(response.data.error) setErr(null);
+            if(response.data.error) return setErr(response.data.error); 
             console.log(response.data.accessToken || response.data.error);
             sendTokenToParent(response.data.accessToken);
         });

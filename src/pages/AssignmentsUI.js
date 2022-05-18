@@ -1,6 +1,6 @@
 import react from 'react';
 import { useState, useEffect } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
 import Assignment from './Assignment';
 import * as Yup from 'yup';
 import axios from 'axios';
@@ -8,6 +8,7 @@ import axios from 'axios';
 function AssignmentsUI({accessToken}){
 
     const [assignments, setAssignments] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [err, setErr] = useState(null);
 
 
@@ -20,7 +21,12 @@ function AssignmentsUI({accessToken}){
             headers: headers
         }).then((response) => {
             setAssignments(response.data);
-        }); 
+        });
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        console.log("Hi!");
     }
 
     useEffect(() => {
@@ -31,16 +37,18 @@ function AssignmentsUI({accessToken}){
         course: "",
         name: "",
         dueDate: "",
-        weight: "",
-        difficulty: ""
+        perfectScore: "",
+        difficulty: "",
+        courseCategory: ""
       };
 
     const validationSchema = Yup.object().shape({
         course: Yup.string().required(),
         name: Yup.string().required(),
         dueDate: Yup.string().required(),
-        weight: Yup.number().required().positive(),
-        difficulty: Yup.number().required().positive().integer().min(1).max(5)
+        perfectScore: Yup.number().required().positive(),
+        difficulty: Yup.number().required().positive().integer().min(1).max(5),
+        courseCategory: Yup.string()
     });
 
     const onSubmit = (data) =>{
@@ -53,13 +61,14 @@ function AssignmentsUI({accessToken}){
             course: data.course,
             name: data.name,
             dueDate: data.dueDate,
-            weight: data.weight,
-            difficulty: data.difficulty
+            perfectScore: data.perfectScore,
+            difficulty: data.difficulty,
+            courseCategory: data.courseCategory
         }
         axios.post(`http://localhost:3001/assignments/create`, config, {
             headers: headers
         }).then((response) => {
-            if(response.data.error) setErr(response.data.error);
+            if(response.data.error) return setErr(response.data.error);
             else {
                 console.log(response.data);
                 setErr(null);
@@ -74,8 +83,10 @@ function AssignmentsUI({accessToken}){
             <h1>Assignments</h1>
 
             <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-                <Form>
+                
+                {({values, handleChange, handleBlur, handleSubmit }) => (
 
+                    <Form>
                     <label>Course Name: </label>
                     <ErrorMessage name="course" component="span"/>
                     <Field 
@@ -83,6 +94,9 @@ function AssignmentsUI({accessToken}){
                         name="course" 
                         type="text"
                         placeholder="(Ex: CS381)"
+                        value={values.course}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                     />
 
                     <label>Name: </label>
@@ -103,11 +117,11 @@ function AssignmentsUI({accessToken}){
                         placeholder="(Ex: 2022-07-05)"
                     />
 
-                    <label>Weight: </label>
-                    <ErrorMessage name="weight" component="span"/>
+                    <label>perfectScore: </label>
+                    <ErrorMessage name="perfectScore" component="span"/>
                     <Field 
-                        id="weight"
-                        name="weight" 
+                        id="perfectScore"
+                        name="perfectScore" 
                         type="text"
                         placeholder="(Ex: 100, 5, 80)"
                     />
@@ -121,29 +135,43 @@ function AssignmentsUI({accessToken}){
                         placeholder="(Hardest - 5, Easiest - 1)"
                     />
 
+                    <label>Course Category: </label>
+                    <ErrorMessage name="courseCategory" component="span"/>
+                    <Field 
+                        id="courseCategory"
+                        name="courseCategory" 
+                        type="text"
+                        placeholder="A category you entered for course... (quiz, hw, etc)"
+                    />
+
                     <button type='submit'> Add Assignment </button>
 
-                </Form>
+                    </Form>
+
+                )}
+                
+                
             </Formik>
 
             <span class="error">{err ? err : undefined}</span>
 
             <div className="assignment-container">
-                { assignments.map(courseAssignments => (
-                        courseAssignments.map(assignment => {
+                { assignments.map(assignment => {
                             const courseName = assignment.courseName;
                             const name = assignment.name;
                             const dueDate = assignment.dueDate;
-                            const weight = assignment.weight;
+                            const weight = assignment.perfectScore;
                             const priority = 1;
+                            const scoreRecieved = assignment.scoreRecieved;
                             return <Assignment 
                                 courseName={courseName}
                                 name={name}
                                 dueDate={dueDate}
-                                weight={weight}
-                                priority={priority}/>
-                        })
-                  ))
+                                perfectScore={weight}
+                                priority={priority}
+                                scoreRecieved={scoreRecieved}
+                                />
+                })
                 }
             </div>
             
